@@ -36,7 +36,6 @@ entity S_Box is
     Port ( 
     -- IN
     data_in : in std_logic_vector(3 downto 0);
-    clk : in std_logic;
     -- OUT
     data_out : out std_logic_vector(3 downto 0)
     );
@@ -66,13 +65,8 @@ this_sbox(13) <= "0000";	-- box[13] 0
 this_sbox(14) <= "1001";	-- box[14] 9
 this_sbox(15) <= "1100";	-- box[15] 12
 
-process(clk) begin
-if clk'event  and clk = '1' then -- detecte un evenement sur la clk pour actualiser le composant  
 
 -- lecture
 data_out <= this_sbox(to_integer(unsigned( data_in)));
-
-end if;
-end process;
 
 end Behavioral;

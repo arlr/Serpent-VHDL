@@ -42,25 +42,23 @@ component S_Box1 is
     Port ( 
     -- IN
     data_in : in std_logic_vector(3 downto 0);
-    clk : in std_logic;
     -- OUT
     data_out : out std_logic_vector(3 downto 0)
     );
 end component;
 
 
-signal clk : std_logic := '0';
 signal data_in : std_logic_vector(3 downto 0);
 signal data_out : std_logic_vector(3 downto 0);
 
 begin
 dut : s_box1
 
-port map ( clk => clk,
+port map (
     data_in => data_in,
     data_out => data_out);
 
-clk <= not clk after 5 ns; 
+
 
 
 process begin 
