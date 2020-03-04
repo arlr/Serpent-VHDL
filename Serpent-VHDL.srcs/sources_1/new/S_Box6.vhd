@@ -2,13 +2,13 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 04.03.2020 13:05:59
+-- Create Date: 04.03.2020 14:47:43
 -- Design Name: 
--- Module Name: S_Box - Behavioral
+-- Module Name: S_Box6 - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
--- Description: S_BOX 0 
+-- Description: 
 -- 
 -- Dependencies: 
 -- 
@@ -32,7 +32,7 @@ use ieee.numeric_std.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity S_Box is
+entity S_Box6 is
     Port ( 
     -- IN
     data_in : in std_logic_vector(3 downto 0);
@@ -40,31 +40,31 @@ entity S_Box is
     -- OUT
     data_out : out std_logic_vector(3 downto 0)
     );
-end S_Box;
+end S_Box6;
 
-architecture Behavioral of S_Box is
--- Defini le contenu de la S-Box
+architecture Behavioral of S_Box6 is
+
 type sbox is array (15 downto 0) of std_logic_vector(3 downto 0);
 signal this_sbox : sbox;    -- "this_sbox" reference la sbox actuel
 
 begin
 -- Initialisation de la SBox
-this_sbox(0) <= "0011";	-- box[0] 3
-this_sbox(1) <= "1000";	-- box[1] 8
-this_sbox(2) <= "1111";	-- box[2] 15
-this_sbox(3) <= "0001";	-- box[3] 1
-this_sbox(4) <= "1010";	-- box[4] 10
-this_sbox(5) <= "0110";	-- box[5] 6
-this_sbox(6) <= "0101";	-- box[6] 5
+this_sbox(0) <= "0111";	-- box[0] 7
+this_sbox(1) <= "0010";	-- box[1] 2
+this_sbox(2) <= "1100";	-- box[2] 12
+this_sbox(3) <= "0101";	-- box[3] 5
+this_sbox(4) <= "1000";	-- box[4] 8
+this_sbox(5) <= "0100";	-- box[5] 4
+this_sbox(6) <= "0110";	-- box[6] 6
 this_sbox(7) <= "1011";	-- box[7] 11
 this_sbox(8) <= "1110";	-- box[8] 14
-this_sbox(9) <= "1101";	-- box[9] 13
-this_sbox(10) <= "0100";	-- box[10] 4
-this_sbox(11) <= "0010";	-- box[11] 2
-this_sbox(12) <= "0111";	-- box[12] 7
-this_sbox(13) <= "0000";	-- box[13] 0
-this_sbox(14) <= "1001";	-- box[14] 9
-this_sbox(15) <= "1100";	-- box[15] 12
+this_sbox(9) <= "1001";	-- box[9] 9
+this_sbox(10) <= "0001";	-- box[10] 1
+this_sbox(11) <= "1111";	-- box[11] 15
+this_sbox(12) <= "1101";	-- box[12] 13
+this_sbox(13) <= "0011";	-- box[13] 3
+this_sbox(14) <= "1010";	-- box[14] 10
+this_sbox(15) <= "0000";	-- box[15] 0
 
 process(clk) begin
 if clk'event  and clk = '1' then -- detecte un evenement sur la clk pour actualiser le composant  
