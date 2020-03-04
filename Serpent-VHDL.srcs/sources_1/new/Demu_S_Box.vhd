@@ -55,17 +55,19 @@ architecture Behavioral of Demu_S_Box is
 begin
 
 process(clk) begin
-case SEL_SBOX is
-  when "000"      =>  data_out <= data_in0;
-  when "001"      =>  data_out <= data_in1;
-  when "010"      =>  data_out <= data_in2;
-  when "011"      =>  data_out <= data_in3;
-  when "100"      =>  data_out <= data_in4;
-  when "101"      =>  data_out <= data_in5;
-  when "110"      =>  data_out <= data_in6;
-  when "111"      =>  data_out <= data_in7;
-  when others =>  data_out <= data_in0;
+if clk'event  and clk = '1' then
+    case SEL_SBOX is
+    when "000"      =>  data_out <= data_in0;
+    when "001"      =>  data_out <= data_in1;
+    when "010"      =>  data_out <= data_in2;
+    when "011"      =>  data_out <= data_in3;
+    when "100"      =>  data_out <= data_in4;
+    when "101"      =>  data_out <= data_in5;
+    when "110"      =>  data_out <= data_in6;
+    when "111"      =>  data_out <= data_in7;
+    when others =>  data_out <= data_in0;
 end case;
+end if;
 
 end process;
 
