@@ -49,7 +49,7 @@ signal this_sbox : sbox;    -- "this_sbox" reference la sbox actuel
 begin
 -- Initialisation de la SBox
 this_sbox(0) <= "1111";	-- box[0] 15
-this_sbox(1) <= "101";	-- box[1] 5
+this_sbox(1) <= "0101";	-- box[1] 5
 this_sbox(2) <= "0010";	-- box[2] 2
 this_sbox(3) <= "1011";	-- box[3] 11
 this_sbox(4) <= "0100";	-- box[4] 4
