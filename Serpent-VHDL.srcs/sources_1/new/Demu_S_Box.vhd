@@ -35,19 +35,19 @@ use ieee.numeric_std.all;
 entity Demu_S_Box is
     Port ( 
     -- IN
-    data_in0 : in std_logic_vector(3 downto 0);
-    data_in1 : in std_logic_vector(3 downto 0);
-    data_in2 : in std_logic_vector(3 downto 0);
-    data_in3 : in std_logic_vector(3 downto 0);
-    data_in4 : in std_logic_vector(3 downto 0);
-    data_in5 : in std_logic_vector(3 downto 0);
-    data_in6 : in std_logic_vector(3 downto 0);
-    data_in7 : in std_logic_vector(3 downto 0);
+    data_in0 : in std_logic_vector(127 downto 0);
+    data_in1 : in std_logic_vector(127 downto 0);
+    data_in2 : in std_logic_vector(127 downto 0);
+    data_in3 : in std_logic_vector(127 downto 0);
+    data_in4 : in std_logic_vector(127 downto 0);
+    data_in5 : in std_logic_vector(127 downto 0);
+    data_in6 : in std_logic_vector(127 downto 0);
+    data_in7 : in std_logic_vector(127 downto 0);
     
     SEL_SBOX : in std_logic_vector(2 downto 0); -- 8 possibilités
     clk : in std_logic;
     -- OUT
-    data_out : out std_logic_vector(3 downto 0)
+    data_out : out std_logic_vector(127 downto 0)
     );
 end Demu_S_Box;
 
