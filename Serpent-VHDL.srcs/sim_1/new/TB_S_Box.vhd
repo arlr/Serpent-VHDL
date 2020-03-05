@@ -58,9 +58,6 @@ port map (
     data_in => data_in,
     data_out => data_out);
 
-
-
-
 process begin 
 
     -- data_in == 0
