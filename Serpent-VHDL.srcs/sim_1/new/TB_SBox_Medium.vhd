@@ -979,20 +979,6 @@ process begin
         -- data_in == 2592773288  
         data_in_7 <= "10011010100010101001010010101000";  
         wait for 10 ns;  
-        assert data_out_7 = "01001100011111000100111011000111" report "Assertion violation." severity error;
-        
-        
-        -- data_in == 860527396  
-        data_in_7 <= "00110011010010101001101100100100";  
-        wait for 10 ns;  
-        assert data_out_7 = "00000000111011000100101011111110" report "Assertion violation." severity error;
-        
-        
-        -- data_in == 2566909450  
-        data_in_7 <= "10011000111111111110111000001010";  
-        wait for 10 ns;  
-        assert data_out_7 = "01000111011001100101010100011100" report "Assertion violation." severity error;
-        
  
 end process;
 end Behavioral;
