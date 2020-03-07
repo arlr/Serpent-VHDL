@@ -41,7 +41,7 @@ entity ReceiveKey is
     stsp : in std_logic;
     -- OUT
     key : out std_logic_vector(255 downto 0);
-    key_size : out integer range 0 to 255 := 0
+    flag_key : out std_logic := '0'
     );
 end ReceiveKey;
 
@@ -64,7 +64,7 @@ if clk'EVENT and clk ='1' then
     if rst = '1' then 
         state <= init;
         cmpt <= 0;
-        key_size  <= 0;
+        flag_key  <= '0';
         key <= (others => '0');
      else 
         case state is 
@@ -88,7 +88,10 @@ if clk'EVENT and clk ='1' then
                 end if;
             
             when calcul =>
-                key_size <= cmpt; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
+                if cmpt /= 255 then
+                    key(cmpt) <= '1'; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
+                end if;
+                flag_key <= '1'; -- indique que la clé est prête 
                 state <= init;
                 
         end case;
@@ -100,7 +103,7 @@ if clk'EVENT and clk ='0' then
     if rst = '1' then 
         state <= init;
         cmpt <= 0;
-        key_size  <= 0;
+        flag_key  <= '0';
         key <= (others => '0');
      else 
         case state is 
@@ -124,12 +127,15 @@ if clk'EVENT and clk ='0' then
                 end if;
             
             when calcul =>
-                key_size <= cmpt; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
+                if cmpt /= 255 then
+                    key(cmpt) <= '1'; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
+                end if;
+                flag_key <= '1'; -- indique que la clé est prête 
                 state <= init;
                 
         end case;
      end if;     
-end if;                    
+end if;                           
 end process;
 
 end Behavioral;
