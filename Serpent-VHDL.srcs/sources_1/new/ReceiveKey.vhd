@@ -41,7 +41,7 @@ entity ReceiveKey is
     stsp : in std_logic;
     -- OUT
     key : out std_logic_vector(255 downto 0);
-    key_size : out std_logic_vector(7 downto 0)
+    key_size : out integer range 0 to 255 := 0
     );
 end ReceiveKey;
 
@@ -50,17 +50,21 @@ architecture Behavioral of ReceiveKey is
 ------------MACHINE ETAT------------
 type state_t is (init, reception, calcul);
 signal state : state_t := init;
+signal cmpt : integer range 0 to 255 := 0; --compteur
 
 begin
 Machine_Etat : process(clk, rst)
-variable cmpt : integer range 0 to 255 := 0; --compteur
 begin
 
-if clk'EVENT and clk = '1' then
+--if clk'EVENT and (clk = '1' or clk = '0') then
+--if rising_edge(clk) or falling_edge(clk) then
+
+-- Front montant
+if clk'EVENT and clk ='1' then
     if rst = '1' then 
         state <= init;
-        cmpt := 0;
-        key_size  <= (others => '0');
+        cmpt <= 0;
+        key_size  <= 0;
         key <= (others => '0');
      else 
         case state is 
@@ -76,7 +80,7 @@ if clk'EVENT and clk = '1' then
                         state <= init;
                     else
                         key(cmpt) <= bitKEy;    --Ecrit la clé au fur et à mesure
-                        cmpt := cmpt + 1; -- compteur de bits  
+                        cmpt <= cmpt + 1; -- compteur de bits  
                     end if;
                     
                 else
@@ -84,12 +88,48 @@ if clk'EVENT and clk = '1' then
                 end if;
             
             when calcul =>
-                key_size <= std_logic_vector(to_unsigned(cmpt, key_size'LENGTH)); -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
+                key_size <= cmpt; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
                 state <= init;
                 
         end case;
      end if;     
-end if;                
+end if;          
+
+-- Front descandant
+if clk'EVENT and clk ='0' then
+    if rst = '1' then 
+        state <= init;
+        cmpt <= 0;
+        key_size  <= 0;
+        key <= (others => '0');
+     else 
+        case state is 
+            when init =>
+                if stsp = '1' then
+                    state <= reception;
+                end if;
+                
+            when reception => 
+                if stsp = '0' then
+                
+                    if cmpt > 255 then  -- Cas ou la clé dépasserait 256 bits
+                        state <= init;
+                    else
+                        key(cmpt) <= bitKEy;    --Ecrit la clé au fur et à mesure
+                        cmpt <= cmpt + 1; -- compteur de bits  
+                    end if;
+                    
+                else
+                    state <= calcul;
+                end if;
+            
+            when calcul =>
+                key_size <= cmpt; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
+                state <= init;
+                
+        end case;
+     end if;     
+end if;                    
 end process;
 
 end Behavioral;
