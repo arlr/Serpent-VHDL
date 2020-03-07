@@ -45,7 +45,7 @@ component ReceiveKey is
     stsp : in std_logic;
     -- OUT
     key : out std_logic_vector(255 downto 0);
-    key_size : out integer range 0 to 255 := 0
+    flag_key : out std_logic
     );
 end component;
 
@@ -55,7 +55,7 @@ signal bitkey : std_logic;
 signal stsp : std_logic;
 
 signal key : std_logic_vector(255 downto 0);
-signal key_size : integer range 0 to 255 := 0;
+signal flag_key : std_logic;
 
 begin
 
@@ -66,7 +66,7 @@ port map(
     bitkey => bitkey,
     stsp => stsp,
     key => key,
-    key_size => key_size
+    flag_key => flag_key
     );
     
 clk <= not clk after 5 ns;
@@ -136,6 +136,1073 @@ wait for 5 ns;
 bitkey <= '1';
 stsp <= '0';
 wait for 5 ns;
+
+
+-- Test avec une clés de 256 bits
+
+rst <= '1';
+wait for 5 ns;
+rst <= '0';
+-- Etat == Init 
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+assert key = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" report "Assertion violation. Key à une vlaleur qu'el ne devrait pas avoir" severity error; 
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+assert key = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" report "Assertion violation. Key à une vlaleur qu'el ne devrait pas avoir" severity error; 
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+assert key = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" report "Assertion violation. Key à une vlaleur qu'el ne devrait pas avoir" severity error; 
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+assert key = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" report "Assertion violation. Key à une vlaleur qu'el ne devrait pas avoir" severity error; 
+
+
+-- Changement d'etat
+bitkey <= '1';
+stsp <= '1';
+wait for 5 ns;
+
+-- Etat == reception
+bitkey <= '1'; -- LSB
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0';
+stsp <= '0';
+wait for 5 ns;
+
+bitkey <= '0'; -- MSB
+stsp <= '0';
+wait for 5 ns;
+
+
+
+-- Changement d'etat
+bitkey <= '1';
+stsp <= '1';
+wait for 5 ns;
+
+-- Etat calcul
+bitkey <= '1';
+stsp <= '0';
+wait for 5 ns;
+
 
 end process;
 

@@ -77,6 +77,7 @@ if clk'EVENT and clk ='1' then
                 if stsp = '0' then
                 
                     if cmpt > 255 then  -- Cas ou la clé dépasserait 256 bits
+                        cmpt <= 0;
                         state <= init;
                     else
                         key(cmpt) <= bitKEy;    --Ecrit la clé au fur et à mesure
@@ -88,7 +89,7 @@ if clk'EVENT and clk ='1' then
                 end if;
             
             when calcul =>
-                if cmpt /= 255 then
+                if cmpt < 256 then
                     key(cmpt) <= '1'; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
                 end if;
                 flag_key <= '1'; -- indique que la clé est prête 
@@ -116,6 +117,7 @@ if clk'EVENT and clk ='0' then
                 if stsp = '0' then
                 
                     if cmpt > 255 then  -- Cas ou la clé dépasserait 256 bits
+                        cmpt <= 0;
                         state <= init;
                     else
                         key(cmpt) <= bitKEy;    --Ecrit la clé au fur et à mesure
@@ -127,7 +129,7 @@ if clk'EVENT and clk ='0' then
                 end if;
             
             when calcul =>
-                if cmpt /= 255 then
+                if cmpt < 256 then
                     key(cmpt) <= '1'; -- Le fait d'ecrire une taille indique au prochain composant que la clé est prête
                 end if;
                 flag_key <= '1'; -- indique que la clé est prête 
