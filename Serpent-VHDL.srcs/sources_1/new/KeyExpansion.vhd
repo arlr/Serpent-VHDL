@@ -21,6 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -37,7 +38,7 @@ Port (
     key : in std_logic_vector(255 downto 0);
     clk : in std_logic;
     rst : in std_logic;
-    i : in integer range 0 to 131;
+    i : in integer range 0 to 131 := 0;
     -- OUT
     wi : out std_logic_vector(31 downto 0)
     );
@@ -48,17 +49,19 @@ type fifo is array (8 downto 0) of std_logic_vector(31 downto 0);
 type state_t is (init, run);
 signal my_fifo : fifo;
 signal state : state_t := init;
+signal old_i : integer range -1 to 131 := 0;
 
 begin
 
 process(rst, clk) 
-    variable phi : bit_vector(31 downto 0) := x"9e3779b9" ;
-    variable old_i : integer range 0 to 131 := 0;
+    variable phi : std_logic_vector(31 downto 0) := x"9e3779b9" ;
 begin
 if rst = '1' then
     my_fifo <= (0 to 8 => (others =>'0')); -- Set to 0 important values
+    wi <= (others => '0');
+    old_i <= 0;
     state <= init;
-    old_i := 0;
+    
     
 elsif clk'event and clk = '1' then
     case state is
@@ -74,15 +77,16 @@ elsif clk'event and clk = '1' then
             state <= run;
         
         when run =>
-            my_fifo(8) <= to_stdlogicvector( (to_bitvector(my_fifo(7) xor my_fifo(4) xor my_fifo(2) xor my_fifo(0)) xor phi) rol 11 );    --Expansion
-            wi <= my_fifo(8);
             -- Keep only useful values
             if (i /= old_i) then
+                wi <= my_fifo(8);
                 for j in 0 to 7 loop
                     my_fifo(j) <= my_fifo(j + 1);
                 end loop;
-                old_i := i;
+                old_i <= i;
             end if;
+            my_fifo(8) <= to_stdlogicvector( to_bitvector( my_fifo(7) xor my_fifo(5) xor my_fifo(3) xor my_fifo(0)  xor phi xor std_logic_vector(to_unsigned(i, 32)) )  rol 11 );    --Expansion
+
             
     end case;
  
