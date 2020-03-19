@@ -64,7 +64,9 @@ elsif (clk'event and clk = '1') then
         when '1' =>
             -- Ecriture
             RAM_K(addr) <= val_in;
-        when '0' => 
+            
+        when others => 
+            -- Lecture
             val_out <= RAM_K(addr);
      end case;
 end if;
