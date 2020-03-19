@@ -37,7 +37,7 @@ entity memK is
     rst : in std_logic;
     clk : in std_logic;
     rw : in std_logic;  -- 1  == Write
-    val_in : in std_logic_vector(127 downto 0);
+    val_in : in std_logic_vector(127 downto 0) := (others => '0');
     addr : in integer range 0 to 32;
     -- OUT
     val_out : out std_logic_vector(127 downto 0)
@@ -45,8 +45,6 @@ entity memK is
 end memK;
 
 architecture Behavioral of memK is
-
-
 type RAM_t is array (32 downto 0) of std_logic_vector(127 downto 0);
 signal RAM_K : RAM_t;
 
