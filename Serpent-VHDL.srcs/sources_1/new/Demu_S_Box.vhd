@@ -44,7 +44,7 @@ entity Demu_S_Box is
     data_in6 : in std_logic_vector(127 downto 0);
     data_in7 : in std_logic_vector(127 downto 0);
     
-    SEL_SBOX : in std_logic_vector(2 downto 0); -- 8 possibilités
+    SEL_SBOX : in integer range 0 to 7 ; -- 8 possibilités
     clk : in std_logic;
     -- OUT
     data_out : out std_logic_vector(127 downto 0)
@@ -57,14 +57,14 @@ begin
 process(clk) begin
 if clk'event  and clk = '1' then
     case SEL_SBOX is
-    when "000"      =>  data_out <= data_in0;
-    when "001"      =>  data_out <= data_in1;
-    when "010"      =>  data_out <= data_in2;
-    when "011"      =>  data_out <= data_in3;
-    when "100"      =>  data_out <= data_in4;
-    when "101"      =>  data_out <= data_in5;
-    when "110"      =>  data_out <= data_in6;
-    when "111"      =>  data_out <= data_in7;
+    when 0      =>  data_out <= data_in0;
+    when 1      =>  data_out <= data_in1;
+    when 2      =>  data_out <= data_in2;
+    when 3      =>  data_out <= data_in3;
+    when 4      =>  data_out <= data_in4;
+    when 5      =>  data_out <= data_in5;
+    when 6     =>  data_out <= data_in6;
+    when 7      =>  data_out <= data_in7;
     when others =>  data_out <= data_in0;
 end case;
 end if;
