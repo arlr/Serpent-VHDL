@@ -40,35 +40,33 @@ architecture Behavioral of TB_Demu_SBox is
 component Demu_S_Box is
     Port ( 
     -- IN
-    data_in0 : in std_logic_vector(3 downto 0);
-    data_in1 : in std_logic_vector(3 downto 0);
-    data_in2 : in std_logic_vector(3 downto 0);
-    data_in3 : in std_logic_vector(3 downto 0);
-    data_in4 : in std_logic_vector(3 downto 0);
-    data_in5 : in std_logic_vector(3 downto 0);
-    data_in6 : in std_logic_vector(3 downto 0);
-    data_in7 : in std_logic_vector(3 downto 0);
+    data_in0 : in std_logic_vector(127 downto 0);
+    data_in1 : in std_logic_vector(127 downto 0);
+    data_in2 : in std_logic_vector(127 downto 0);
+    data_in3 : in std_logic_vector(127 downto 0);
+    data_in4 : in std_logic_vector(127 downto 0);
+    data_in5 : in std_logic_vector(127 downto 0);
+    data_in6 : in std_logic_vector(127 downto 0);
+    data_in7 : in std_logic_vector(127 downto 0);
     
-    SEL_SBOX : in std_logic_vector(2 downto 0); -- 8 possibilités
-    clk : in std_logic;
+    SEL_SBOX : in integer range 0 to 7; -- 8 possibilités
     -- OUT
-    data_out : out std_logic_vector(3 downto 0)
+    data_out : out std_logic_vector(127 downto 0)
     );
 end component;
 
 
-signal data_in0 : std_logic_vector(3 downto 0) :="0000" ;
-signal data_in1 : std_logic_vector(3 downto 0) :="0001" ;
-signal data_in2 : std_logic_vector(3 downto 0) :="0010";
-signal data_in3 : std_logic_vector(3 downto 0) :="0011";
-signal data_in4 : std_logic_vector(3 downto 0) :="0100";
-signal data_in5 : std_logic_vector(3 downto 0) :="0101";
-signal data_in6 : std_logic_vector(3 downto 0) :="0110";
-signal data_in7 : std_logic_vector(3 downto 0) :="0111";
+signal data_in0 : std_logic_vector(127 downto 0) := (others => '0');
+signal data_in1 : std_logic_vector(127 downto 0) := (others => '0');
+signal data_in2 : std_logic_vector(127 downto 0) := (others => '1');
+signal data_in3 : std_logic_vector(127 downto 0) := (others => '0');
+signal data_in4 : std_logic_vector(127 downto 0) := (others => '0');
+signal data_in5 : std_logic_vector(127 downto 0) := (others => '0');
+signal data_in6 : std_logic_vector(127 downto 0) := (others => '0');
+signal data_in7 : std_logic_vector(127 downto 0) := (others => '1');
 
-signal clk :  std_logic := '0';
-signal sel_sbox : std_logic_vector(2 downto 0);
-signal data_out : std_logic_vector(3 downto 0);
+signal sel_sbox : integer range 0 to 7; -- 8 possibilités
+signal data_out : std_logic_vector(127 downto 0);
 
 
 begin
@@ -76,7 +74,6 @@ begin
 dut: demu_s_box
 
 port map(
-    clk => clk,
     sel_sbox => sel_sbox,
     data_out => data_out,
     data_in0 => data_in0,
@@ -89,54 +86,53 @@ port map(
     data_in7 => data_in7
     );
     
-clk <= not clk after 5 ns; 
     
 process begin
 
     -- SEL_BOX == 0
-    SEL_SBOX <= "000";
+    SEL_SBOX <= 0;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 1
-    SEL_SBOX <= "001";
+    SEL_SBOX <= 1;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 2
-    SEL_SBOX <= "010";
+    SEL_SBOX <= 2;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 3
-    SEL_SBOX <= "011";
+    SEL_SBOX <= 3;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 4
-    SEL_SBOX <= "100";
+    SEL_SBOX <= 4;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 5
-    SEL_SBOX <= "101";
+    SEL_SBOX <= 5;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 6
-    SEL_SBOX <= "110";
+    SEL_SBOX <= 6;
     wait for 10 ns;
     
     
 
     -- SEL_BOX == 7
-    SEL_SBOX <= "111";
+    SEL_SBOX <= 7;
     wait for 10 ns;
     
 
