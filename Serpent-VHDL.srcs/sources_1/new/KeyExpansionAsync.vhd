@@ -52,7 +52,7 @@ process(key, addr)
     variable RAM_KeyExp : RAM_t := (others => (others =>'0'));
     constant phi : std_logic_vector(31 downto 0) := x"9e3779b9" ;
 begin
-            RAM_KeyExp := (others => (others =>'0'));
+            --RAM_KeyExp := (others => (others =>'0'));
             RAM_KeyExp(0) := key(31 downto 0);
             RAM_KeyExp(1) := key(63 downto 32);
             RAM_KeyExp(2) := key(95 downto 64);
