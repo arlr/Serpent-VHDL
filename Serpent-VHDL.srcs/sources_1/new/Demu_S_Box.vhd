@@ -51,21 +51,34 @@ entity Demu_S_Box is
 end Demu_S_Box;
 
 architecture Behavioral of Demu_S_Box is
+signal big_out : std_logic_vector(1023 downto 0);
+
+
 begin
+big_out(1023 downto 896) <= data_in7; 
+big_out(895 downto 768) <= data_in6; 
+big_out(767 downto 640) <= data_in5; 
+big_out(639 downto 512) <= data_in4; 
+big_out(511 downto 384) <= data_in3; 
+big_out(383 downto 256) <= data_in2; 
+big_out(255 downto 128) <= data_in1; 
+big_out(127 downto 0) <= data_in0; 
 
-process(SEL_SBOX) begin
-case SEL_SBOX is
-    when 0      =>  data_out <= data_in0;
-    when 1      =>  data_out <= data_in1;
-    when 2      =>  data_out <= data_in2;
-    when 3      =>  data_out <= data_in3;
-    when 4      =>  data_out <= data_in4;
-    when 5      =>  data_out <= data_in5;
-    when 6      =>  data_out <= data_in6;
-    when 7      =>  data_out <= data_in7;
-    when others =>  data_out <= data_in0;
-end case;
+data_out <= big_out(SEL_SBOX*128+127 downto SEL_SBOX*128);
 
-end process;
+--process(SEL_SBOX) begin
+--case SEL_SBOX is
+--    when 0      =>  data_out <= data_in0;
+--    when 1      =>  data_out <= data_in1;
+--    when 2      =>  data_out <= data_in2;
+--    when 3      =>  data_out <= data_in3;
+--    when 4      =>  data_out <= data_in4;
+--    when 5      =>  data_out <= data_in5;
+--    when 6      =>  data_out <= data_in6;
+--    when 7      =>  data_out <= data_in7;
+--    when others =>  data_out <= data_in0;
+--end case;
+
+--end process;
 
 end Behavioral;
